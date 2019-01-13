@@ -16,25 +16,32 @@ class AddContact(unittest.TestCase):
     def test_add_contact(self):
         driver = self.driver
         self.login(driver, "admin", "secret")
-        driver.find_element_by_xpath(
-            "(.//*[normalize-space(text()) and normalize-space(.)='Password:'])[1]/following::input[2]").click()
-        self.add_contact(driver)
+        self.add_contact(driver, "Ivan", "Ivanovich", "Ivanov", "ivan@ivan.ru")
+        self.logout(driver)
+
+    def logout(self, driver):
         driver.find_element_by_link_text("Logout").click()
 
-    def add_contact(self, driver):
+    def add_contact(self, driver, name, middle_name, last_name, email):
+        # add new contact
         driver.find_element_by_link_text("add new").click()
+        # add first name
         driver.find_element_by_name("firstname").click()
         driver.find_element_by_name("firstname").clear()
-        driver.find_element_by_name("firstname").send_keys("Ivan")
+        driver.find_element_by_name("firstname").send_keys(name)
+        # add middle name
         driver.find_element_by_name("middlename").click()
         driver.find_element_by_name("middlename").clear()
-        driver.find_element_by_name("middlename").send_keys("Ivanovich")
+        driver.find_element_by_name("middlename").send_keys(middle_name)
+        # add last name
         driver.find_element_by_name("lastname").click()
         driver.find_element_by_name("lastname").clear()
-        driver.find_element_by_name("lastname").send_keys("Ivanov")
+        driver.find_element_by_name("lastname").send_keys(last_name)
+        # add email
         driver.find_element_by_name("email").click()
         driver.find_element_by_name("email").clear()
-        driver.find_element_by_name("email").send_keys("ivan@ivan.ru")
+        driver.find_element_by_name("email").send_keys(email)
+        # submit
         driver.find_element_by_xpath(
             "(.//*[normalize-space(text()) and normalize-space(.)='Notes:'])[1]/following::input[1]").click()
 
@@ -46,6 +53,8 @@ class AddContact(unittest.TestCase):
         driver.find_element_by_name("pass").click()
         driver.find_element_by_name("pass").clear()
         driver.find_element_by_name("pass").send_keys(password)
+        driver.find_element_by_xpath(
+            "(.//*[normalize-space(text()) and normalize-space(.)='Password:'])[1]/following::input[2]").click()
 
     def is_element_present(self, how, what):
         try:
