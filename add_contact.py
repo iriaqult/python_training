@@ -16,7 +16,7 @@ class AddContact(unittest.TestCase):
     def test_add_contact(self):
         driver = self.driver
         self.login(driver, "admin", "secret")
-        self.add_contact(driver, contact("Ivan", "Ivanovich", "Ivanov", "ivan@ivan.ru"))
+        self.add_contact(driver, contact(name="Ivan", maddle_name="Ivanovich", last_name="Ivanov", email="ivan@ivan.ru"))
         self.logout(driver)
 
     def logout(self, driver):
