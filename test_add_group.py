@@ -12,17 +12,19 @@ class TestAddGroup(unittest.TestCase):
         self.wd.implicitly_wait(30)
     
     def test_add_group(self):
+
+        self.login(username="admin", password="secret")
+        self.group_creation(group(name="test", header="fgdjsl", footer="dhjkd"))
+        self.logout()
+
+
+    def logout(self):
         wd = self.wd
-        self.login(wd, username="admin", password="secret")
-        self.group_creation(wd, group(name="test", header="fgdjsl", footer="dhjkd"))
-        self.logout(wd)
-
-
-    def logout(self, wd):
         wd.find_element_by_link_text("Logout").click()
 
 
-    def group_creation(self, wd, group):
+    def group_creation(self, group):
+        wd = self.wd
         wd.find_element_by_link_text("groups").click()
         # init group creation
         wd.find_element_by_name("new").click()
@@ -40,7 +42,8 @@ class TestAddGroup(unittest.TestCase):
         wd.find_element_by_name("submit").click()
         wd.find_element_by_link_text("groups").click()
 
-    def login(self, wd, username, password):
+    def login(self, username, password):
+        wd = self.wd
         wd.get("http://localhost/addressbook/")
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys(username)
