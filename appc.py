@@ -1,7 +1,5 @@
 from selenium import webdriver
-import unittest
-
-class AppContact:
+class Application:
 
 
     def __init__(self):

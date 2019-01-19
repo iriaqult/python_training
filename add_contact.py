@@ -1,14 +1,15 @@
 # -*- coding: utf-8 -*-
 
 from contact import contact
-from appc import AppContact
+from appc import Application
 import pytest
 
 @pytest.fixture
 def app(request):
-    fixture = AppContact()
-    request.addfinalizer(fixture.destroy) #указание на то как д.бразрушена фикстура
+    fixture = Application()
+    request.addfinalizer(fixture.destroy)
     return fixture
+
 
 def test_add_contact(app): #тестовый метод прнимающий в качестве пвараметра фикстуру
     app.login("admin", "secret")
