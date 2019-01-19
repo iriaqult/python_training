@@ -42,17 +42,17 @@ class AddContact(unittest.TestCase):
         driver.find_element_by_name("email").clear()
         driver.find_element_by_name("email").send_keys(contact.email)
         # submit
-        driver.find_element_by_xpath(("(//input[@name='submit'])[2]").click()
+        driver.find_element_by_xpath("(//input[@name='submit'])[2]").click()
 
-    def login(self, driver, username, password):
-        driver.get("http://localhost/addressbook/")
-        driver.find_element_by_name("user").clear()
-        driver.find_element_by_name("user").send_keys(username)
-        driver.find_element_by_id("LoginForm").click()
-        driver.find_element_by_name("pass").click()
-        driver.find_element_by_name("pass").clear()
-        driver.find_element_by_name("pass").send_keys(password)
-        driver.find_element_by_xpath("//input[@value='Login']").click()
+    def login(self, wd, username, password):
+        wd.get("http://localhost/addressbook/")
+        wd.find_element_by_name("user").clear()
+        wd.find_element_by_name("user").send_keys(username)
+        wd.find_element_by_id("LoginForm").click()
+        wd.find_element_by_name("pass").click()
+        wd.find_element_by_name("pass").clear()
+        wd.find_element_by_name("pass").send_keys(password)
+        wd.find_element_by_xpath("//input[@value='Login']").click()
 
     def is_element_present(self, how, what):
         try:
