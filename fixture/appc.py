@@ -1,5 +1,5 @@
 from selenium import webdriver
-class Application:
+class Application1:
 
 
     def __init__(self):
