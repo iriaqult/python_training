@@ -22,14 +22,18 @@ class GroupHelper:
         wd.find_element_by_link_text("groups").click()
 
 
-
-    def delete_first_group(self):
+    def edit_first_group(self):
         wd = self.app.wd
         wd.find_element_by_link_text("groups").click()
         #select first group
         wd.find_element_by_name("selected[]").click()
-        #submit deletion
-        wd.find_element_by_name("delete").click()
+        #edit ggroup
+        wd.find_element_by_name("edit").click()
+        wd.find_element_by_name("group_name").click()
+        wd.find_element_by_name("group_name").clear()
+        wd.find_element_by_name("group_name").send_keys("new")
+        #submit edit
+        wd.find_element_by_name("update").click()
 
 
 

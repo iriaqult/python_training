@@ -24,3 +24,23 @@ class ContactHelper:
         wd.find_element_by_name("email").send_keys(contact.email)
         # submit
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
+
+    def delete_first_contact(self):
+        wd = self.app.wd
+        #select first contact
+        wd.find_element_by_name("selected[]").click()
+        #submit deletion
+        wd.find_element_by_xpath("//input[@value='Delete']").click()
+        wd.switch_to_alert().accept()
+
+    def edit_first_contact(self):
+        wd = self.app.wd
+        #select first contact
+        wd.find_element_by_name("selected[]").click()
+        #edit
+        wd.find_element_by_xpath("//img[@alt='Edit']").click()
+        wd.find_element_by_name("company").click()
+        wd.find_element_by_name("company").clear()
+        wd.find_element_by_name("company").send_keys("Google")
+        #submit edit
+        wd.find_element_by_name("update").click()
