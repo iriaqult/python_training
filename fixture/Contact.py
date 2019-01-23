@@ -38,9 +38,10 @@ class ContactHelper:
         #select first contact
         wd.find_element_by_name("selected[]").click()
         #edit
-        wd.find_element_by_xpath("//img[@alt='Edit']").click()
-        wd.find_element_by_name("company").click()
-        wd.find_element_by_name("company").clear()
-        wd.find_element_by_name("company").send_keys("Google")
-        #submit edit
+        wd.find_element_by_css_selector("img[alt=\"Edit\"]").click()
+        wd.find_element_by_name("firstname").click()
+        wd.find_element_by_name("firstname").clear()
+        wd.find_element_by_name("firstname").send_keys("Edited")
+        # submit edit
         wd.find_element_by_name("update").click()
+
