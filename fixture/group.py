@@ -8,7 +8,7 @@ class GroupHelper:
         # init group creation
         wd.find_element_by_name("new").click()
         # fill group
-        fill_group(self, group)
+        self.fill_group(self, group)
         # submit group creation
         wd.find_element_by_name("submit").click()
         wd.find_element_by_link_text("groups").click()
@@ -17,26 +17,49 @@ class GroupHelper:
     def edit_first_group(self, group):
         wd = self.app.wd
         wd.find_element_by_link_text("groups").click()
-        #select first group
-        wd.find_element_by_name("selected[]").click()
+        self.select_first_group()
         wd.find_element_by_name("edit").click()
         #edit group
-        fill_group(self, group)
+        self.fill_group(self, group)
         #submit edit
         wd.find_element_by_name("update").click()
 
-def fill_group(self, group):
-    wd = self.app.wd
-    # fill group form
-    wd.find_element_by_name("group_name").click()
-    wd.find_element_by_name("group_name").clear()
-    wd.find_element_by_name("group_name").send_keys(group.name)
-    wd.find_element_by_name("group_header").click()
-    wd.find_element_by_name("group_header").clear()
-    wd.find_element_by_name("group_header").send_keys(group.header)
-    wd.find_element_by_name("group_footer").click()
-    wd.find_element_by_name("group_footer").clear()
-    wd.find_element_by_name("group_footer").send_keys(group.footer)
+    def select_first_group(self):
+        wd = self.app.wd
+        wd.find_element_by_name("selected[]").click()
+
+    def modify_first_group(self,new_group_data):
+        wd = self.app.wd
+        wd.find_element_by_link_text("groups").click()
+        # select first group
+        self.select_first_group(new_group_data)
+        wd.find_element_by_name("edit").click()
+
+        # submit edit
+        wd.find_element_by_name("update").click()
+
+    def delete_first_group(self):
+        wd = self.app.wd
+        wd.find_element_by_link_text("groups").click()
+        self.select_first_group()
+        #submit deletion
+        wd.find_element_by_name("delete").click()
+
+
+
+    def fill_group(self, group):
+        wd = self.app.wd
+        self.type("group_name", group.name)
+        self.type("group_header", group.header)
+        self.type("group_footer", group.footer)
+
+
+    def type(self, field_name, text):
+        wd = self.app.wd
+        if text is not None:
+            wd.find_element_by_name(field_name).click()
+            wd.find_element_by_name(field_name).clear()
+            wd.find_element_by_name(field_name).send_keys(text)
 
 
 
