@@ -32,14 +32,6 @@ class ContactHelper:
         # submit edit
         wd.find_element_by_name("update").click()
 
-    def edit_first_contact(self, contact):
-        wd = self.app.wd
-        #select first contact
-        self.select_first_contact()
-        self.fill_form(self, contact)
-        # submit edit
-        wd.find_element_by_name("update").click()
-
 
     def fill_form(self, contact):
         wd = self.app.wd
