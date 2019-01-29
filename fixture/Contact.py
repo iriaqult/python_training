@@ -51,7 +51,12 @@ class ContactHelper:
 
     def count(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("home").click()
+        self.open_home_page()
         return len(wd.find_elements_by_name("selected[]"))
+
+    def open_home_page(self):
+        wd = self.app.wd
+        if not len(wd.find_elements_by_xpath("//input[@value='Send e-Mail']"))>0:
+            wd.find_element_by_link_text("home").click()
 
 
