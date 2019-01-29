@@ -23,9 +23,14 @@ class ContactHelper:
         wd = self.app.wd
         wd.find_element_by_name("selected[]").click()
 
-    def modify_first_contact(self,new_contact_data):
+    def modify_first_contact(self, new_contact_data):
         wd = self.app.wd
         self.select_first_contact()
+        # click edit
+        wd.find_element_by_css_selector("img[alt=\"Edit\"]").click()
+        self.fill_form(new_contact_data)
+        # submit edit
+        wd.find_element_by_name("update").click()
 
     def edit_first_contact(self, contact):
         wd = self.app.wd
@@ -36,21 +41,20 @@ class ContactHelper:
         wd.find_element_by_name("update").click()
 
 
-
     def fill_form(self, contact):
         wd = self.app.wd
-        self.type("firstname", contact.name)
-        self.type("middlename", contact.middle_name)
-        self.type("lastname", contact.last_name)
-        self.type("email", contact.email)
+        self.change_field_value("firstname", contact.name)
+        self.change_field_value("middlename", contact.middle_name)
+        self.change_field_value("lastname", contact.last_name)
+        self.change_field_value("email", contact.email)
  
 
-    def type(self, field_name, text):
+    def change_field_value(self, field_name, text):
         wd = self.app.wd
         if text is not None:
             wd.find_element_by_name(field_name).click()
             wd.find_element_by_name(field_name).clear()
-            wd.find_element_by_name(field_name).send_keys(contact.name)
+            wd.find_element_by_name(field_name).send_keys(text)
 
 
 
