@@ -6,7 +6,7 @@ class ContactHelper:
         wd = self.app.wd
         # add new contact
         wd.find_element_by_link_text("add new").click()
-        self.fill_form (self, contact)
+        self.fill_form (contact)
         # submit
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
 
