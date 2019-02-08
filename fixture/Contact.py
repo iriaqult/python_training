@@ -71,7 +71,10 @@ class ContactHelper:
         self.open_home_page()
         contacts = []
         for element in wd.find_elements_by_name("entry"):
-            text = element.find_element_by_name("selected[]").get_attribute("accept")
+            #for cell in element:
+            cells = element.find_elements_by_tag_name("td")
+            text = cells[2].text
+            #text = element.find_element_by_name("selected[]").get_attribute("accept")
             id = element.find_element_by_name("selected[]").get_attribute("value")
-            contacts.append(contact(email = text, id = id))
+            contacts.append(contact(name = text, id = id))
         return contacts

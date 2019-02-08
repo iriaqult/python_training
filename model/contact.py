@@ -8,13 +8,13 @@ class contact:
         self.middle_name=middle_name
         self.last_name=last_name
         self.email = email
-        self.id = id
+        self.id=id
 
     def __repr__(self):
-        return "%s:%s" % (self.id, self.email)
+        return "%s:%s" % (self.id, self.name)
 
     def __eq__(self, other):
-        return self.id == other.id and self.email == other.email
+        return (self.id is None or other.id is None or self.id == other.id) and self.name == other.name
 
 
     def id_or_max(self):
