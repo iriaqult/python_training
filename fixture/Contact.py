@@ -90,8 +90,17 @@ class ContactHelper:
             self.contact_cache = []
             for element in wd.find_elements_by_name("entry"):
                 cells = element.find_elements_by_tag_name("td")
-                text = cells[2].text
+                firstname = cells[2].text
                 lastname = cells[1].text
                 id = element.find_element_by_name("selected[]").get_attribute("value")
-                self.contact_cache.append(contact(name = text, id = id, last_name = lastname))
+                self.contact_cache.append(contact(name = firstname, id = id, last_name = lastname))
         return list(self.contact_cache)
+
+
+    def open_contact_page_to_view_by_index(self,index):
+        wd = self.app.wd
+        self.open_home_page()
+        row =  wd.find_elements_by_name("entry")[index]
+        cell = row.find_elements_by_tag_name("td")[6]
+        cell.find_element_by_tag_name("a").click()
+
