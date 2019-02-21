@@ -44,14 +44,17 @@ class ContactHelper:
     def modify_contact_by_index(self, new_contact_data,index):
         wd = self.app.wd
         self.open_home_page()
-        self.select_contact_by_index(index)
-        # click edit
-        wd.find_element_by_css_selector('img[alt="Edit"]').click()
+        #self.select_contact_by_index(index)
+        self.click_edit_by_index(index)
         self.fill_form(new_contact_data)
         # submit edit
         wd.find_element_by_name("update").click()
         self.contact_cache = None
 
+    def click_edit_by_index(self, index):
+        wd = self.app.wd
+        #add index here
+        wd.find_element_by_css_selector('img[alt="Edit"]').click()
 
     def fill_form(self, contact):
         wd = self.app.wd
