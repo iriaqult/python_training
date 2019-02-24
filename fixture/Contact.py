@@ -96,7 +96,8 @@ class ContactHelper:
                 id = element.find_element_by_name("selected[]").get_attribute("value")
                 all_phones = cells[5].text.splitlines()
                 self.contact_cache.append(contact(name=firstname, id=id, last_name=lastname,
-                                                  homephone=all_phones[0], mobilephone=all_phones[1], workphone=all_phones[2]))
+                                                  homephone=all_phones[0], mobilephone=all_phones[1], workphone=all_phones[2],
+                                                  secondaryphone=all_phones[3]))
         return list(self.contact_cache)
 
 
