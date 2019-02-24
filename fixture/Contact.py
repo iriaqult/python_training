@@ -44,14 +44,15 @@ class ContactHelper:
     def modify_contact_by_index(self, new_contact_data,index):
         wd = self.app.wd
         self.open_home_page()
-        self.select_contact_by_index(index)
-        # click edit
-        wd.find_element_by_css_selector('img[alt="Edit"]').click()
+        self.edit_by_index(index)
         self.fill_form(new_contact_data)
         # submit edit
         wd.find_element_by_name("update").click()
         self.contact_cache = None
 
+    def edit_by_index(self, index):
+        wd = self.app.wd
+        wd.find_elements_by_xpath("(//img[@alt='Edit'])"[index]).click()
 
     def fill_form(self, contact):
         wd = self.app.wd
@@ -95,8 +96,7 @@ class ContactHelper:
                 id = element.find_element_by_name("selected[]").get_attribute("value")
                 all_phones = cells[5].text.splitlines()
                 self.contact_cache.append(contact(name=firstname, id=id, last_name=lastname,
-                                                  homephone=all_phones[0], mobilephone=all_phones[1], workphone=all_phones[2],
-                                                  secondaryphone=all_phones[3]))
+                                                  homephone=all_phones[0], mobilephone=all_phones[1], workphone=all_phones[2]))
         return list(self.contact_cache)
 
 
