@@ -96,8 +96,7 @@ class ContactHelper:
                 id = element.find_element_by_name("selected[]").get_attribute("value")
                 all_phones = cells[5].text.splitlines()
                 self.contact_cache.append(contact(name=firstname, id=id, last_name=lastname,
-                                                  homephone=all_phones[0], mobilephone=all_phones[1], workphone=all_phones[2],
-                                                  secondaryphone=all_phones[3]))
+                                                  homephone=all_phones[0], mobilephone=all_phones[2], workphone=all_phones[1]))
         return list(self.contact_cache)
 
 
@@ -116,17 +115,14 @@ class ContactHelper:
         cell.find_element_by_tag_name("a").click()
 
 
-    def contact_from_home_page(self, index):
+    def get_contact_info_from_edit_page(self, index):
         wd = self.app.wd
         self.open_contact_to_edit_by_index(index)
-        firstname = wd.find_elements_by_name("firstname").get_attribute("value")
-        lastname = wd.find_elements_by_name("lastname").get_attribute("value")
-        id = wd.find_elements_by_name("id").get_attribute("value")
-        homephone = wd.find_elements_by_name("home").get_attribute("value")
-        mobilephone = wd.find_elements_by_name("work").get_attribute("value")
-        workphone = wd.find_elements_by_name("mobile").get_attribute("value")
-        secondaryphone = wd.find_elements_by_name("phone2").get_attribute("value")
+        firstname = wd.find_element_by_name("firstname").get_attribute("value")
+        lastname = wd.find_element_by_name("lastname").get_attribute("value")
+        id = wd.find_element_by_name("id").get_attribute("value")
+        homephone = wd.find_element_by_name("home").get_attribute("value")
+        mobilephone = wd.find_element_by_name("work").get_attribute("value")
+        workphone = wd.find_element_by_name("mobile").get_attribute("value")
         return contact(name=firstname,last_name=lastname,id=id, homephone=homephone,
-                       mobilephone=mobilephone,workphone=workphone,secondaryphone=secondaryphone)
-
-
+                       mobilephone=mobilephone,workphone=workphone)
