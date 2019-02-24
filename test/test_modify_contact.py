@@ -8,7 +8,7 @@ def test_edit_first_contact_name(app):
         app.Contact.create(contact(name="Ivan", middle_name="Ivanovich", last_name="Ivanov", email="ivan@ivan.ru"))
     old_contacts = app.Contact.get_contact_list()
     index = randrange(len(old_contacts))
-    Contact = contact(name="Jane")
+    Contact = contact(name="Jane", last_name="Birkin")
     Contact.id = old_contacts[index].id
     app.Contact.modify_contact_by_index(Contact, index)
     assert len(old_contacts) == app.Contact.count()

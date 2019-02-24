@@ -52,7 +52,7 @@ class ContactHelper:
 
     def edit_by_index(self, index):
         wd = self.app.wd
-        wd.find_elements_by_xpath("(//img[@alt='Edit'])"[index]).click()
+        wd.find_elements_by_xpath("(//img[@alt='Edit'])")[index].click()
 
     def fill_form(self, contact):
         wd = self.app.wd
