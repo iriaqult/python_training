@@ -1,5 +1,5 @@
 from model.contact import contact
-
+import re
 
 class ContactHelper:
     def __init__(self, app):
@@ -96,7 +96,7 @@ class ContactHelper:
                 id = element.find_element_by_name("selected[]").get_attribute("value")
                 all_phones = cells[5].text.splitlines()
                 self.contact_cache.append(contact(name=firstname, id=id, last_name=lastname,
-                                                  homephone=all_phones[0], mobilephone=all_phones[2], workphone=all_phones[1]))
+                                                  homephone=all_phones[0], mobilephone=all_phones[1], workphone=all_phones[2]))
         return list(self.contact_cache)
 
 
@@ -122,7 +122,19 @@ class ContactHelper:
         lastname = wd.find_element_by_name("lastname").get_attribute("value")
         id = wd.find_element_by_name("id").get_attribute("value")
         homephone = wd.find_element_by_name("home").get_attribute("value")
-        mobilephone = wd.find_element_by_name("work").get_attribute("value")
-        workphone = wd.find_element_by_name("mobile").get_attribute("value")
+        mobilephone = wd.find_element_by_name("mobile").get_attribute("value")
+        workphone = wd.find_element_by_name("work").get_attribute("value")
+        secondaryphone = wd.find_element_by_name("fax").get_attribute("value")
         return contact(name=firstname,last_name=lastname,id=id, homephone=homephone,
-                       mobilephone=mobilephone,workphone=workphone)
+                       mobilephone=mobilephone,workphone=workphone, secondaryphone=secondaryphone)
+
+    def get_contact_from_view_page(self, index):
+        wd = self.app.wd
+        self.open_contact_to_view_by_index(index)
+        text = wd.find_element_by_id("content").text
+        homephone = re.search("H: (.*)", text).group(1)
+        mobilephone = re.search("M: (.*)", text).group(1)
+        workphone = re.search("W: (.*)", text).group(1)
+        secondaryphone = re.search("F: (.*)", text).group(1)
+        return contact(homephone=homephone,
+                       mobilephone=mobilephone,workphone=workphone, secondaryphone=secondaryphone)
