@@ -132,9 +132,10 @@ class ContactHelper:
         wd = self.app.wd
         self.open_contact_to_view_by_index(index)
         text = wd.find_element_by_id("content").text
-        homephone = re.search("H: (.*)", text).group(1)
-        mobilephone = re.search("M: (.*)", text).group(1)
-        workphone = re.search("W: (.*)", text).group(1)
-        secondaryphone = re.search("F: (.*)", text).group(1)
-        return contact(homephone=homephone,
-                       mobilephone=mobilephone,workphone=workphone, secondaryphone=secondaryphone)
+        # доработать обратную проверку по рег.выражению для задания 14
+        all_phones = re.findall (["H: (.*)","M: (.*)","W: (.*)","F: (.*)"],text)
+        #homephone = re.search("H: (.*)", text).group(1)
+        #mobilephone = re.search("M: (.*)", text).group(1)
+        #workphone = re.search("W: (.*)", text).group(1)
+        #secondaryphone = re.search("F: (.*)", text).group(1)
+        return contact(all_phones_from_viewpage=all_phones)
