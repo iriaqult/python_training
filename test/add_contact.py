@@ -1,15 +1,29 @@
 # -*- coding: utf-8 -*-
 
 from model.contact import contact
+import pytest
+import random
+import string
+
+def random_string(prefix, maxlen):
+    symbols = string.ascii_letters + string.digits + string.punctuation + " "*10 #из каких символов случайно выбираем, чтобы увеличить частоту пробелов, умножили их количество на 10
+    return prefix + "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
 
 
-def test_add_contact(app): #тестовый метод прнимающий в качестве пвараметра фикстуру
+testdata = [contact(name="", middle_name="", last_name="", email="")]+[
+    contact(name=random_string("name", 10), middle_name = random_string("middle_name", 20),
+          last_name= random_string("last_name", 10),email=random_string("last_name", 10))
+    for i in range(5)
+]
+
+@pytest.mark.parametrize("contact", testdata, ids=[repr(x) for x in testdata])
+def test_add_contact(app, contact): #тестовый метод прнимающий в качестве пвараметра фикстуру
+    pass
     old_contacts = app.Contact.get_contact_list()
-    Contact = contact(name="Ivan", middle_name="Ivanovich", last_name="Ivanov", email="ivan@ivan.ru")
-    app.Contact.create(Contact)
+    app.Contact.create(contact)
     assert len(old_contacts) + 1 == app.Contact.count()
     new_contacts = app.Contact.get_contact_list()
-    old_contacts.append(Contact)
+    old_contacts.append(contact)
     assert sorted(old_contacts, key = contact.id_or_max) == sorted(new_contacts, key = contact.id_or_max)
 
 

@@ -5,7 +5,7 @@ import random
 import string
 
 def random_string(prefix, maxlen):
-    symbols = string.ascii_letters + string.digits + " "*10 #из каких символов случайно выбираем, чтобы увеличить частоту пробелов, умножили их количество на 10
+    symbols = string.ascii_letters + string.digits + string.punctuation + " "*10 #из каких символов случайно выбираем, чтобы увеличить частоту пробелов, умножили их количество на 10
     return prefix + "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
 
 #testdata = [group(name=name, header=header, footer=footer) #либо None либо случайный , всего 8 комбинаций
