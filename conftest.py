@@ -8,7 +8,7 @@ fixture = None
 def app(request):
     global fixture
     if fixture is None:
-        fixture = Application()
+        fixture = Application(browser="firefox")
 
     else:
         if not fixture.is_valid():
