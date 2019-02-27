@@ -1,11 +1,22 @@
 # -*- coding: utf-8 -*-
 from model.group import group
 import pytest
+import random
+import string
 
+def random_string(prefix, maxlen):
+    symbols = string.ascii_letters + string.digits + " "*10 #из каких символов случайно выбираем, чтобы увеличить частоту пробелов, умножили их количество на 10
+    return prefix + "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
 
-testdata = [
-    group(name="test", header="fgdjsl", footer="dhjkd")
-    group(name="", header="", footer="")
+#testdata = [group(name=name, header=header, footer=footer) #либо None либо случайный , всего 8 комбинаций
+#            for name in ["",random_string("name", 10)]
+#            for header in ["",random_string("header", 20)]
+#            for footer in ["",random_string("footer", 20)]
+#]
+
+testdata = [group(name="", header="", footer="")]+[
+    group(name=random_string("name", 10), header = random_string("header", 20), footer= random_string("footer", 20))
+    for i in range(5)
 ]
 
 @pytest.mark.parametrize("Group", testdata, ids=[repr(x) for x in testdata])
