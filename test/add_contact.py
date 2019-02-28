@@ -18,7 +18,6 @@ testdata = [contact(name="", middle_name="", last_name="", email="")]+[
 
 @pytest.mark.parametrize("Contact1", testdata, ids=[repr(x) for x in testdata])
 def test_add_contact(app, Contact1): #тестовый метод прнимающий в качестве пвараметра фикстуру
-    pass
     old_contacts = app.Contact.get_contact_list()
     app.Contact.create(Contact1)
     assert len(old_contacts) + 1 == app.Contact.count()
