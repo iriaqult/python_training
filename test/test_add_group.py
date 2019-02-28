@@ -19,24 +19,16 @@ testdata = [group(name="", header="", footer="")]+[
     for i in range(5)
 ]
 
-@pytest.mark.parametrize("group", testdata, ids=[repr(x) for x in testdata])
-def test_add_group(app, group):
+@pytest.mark.parametrize("Group", testdata, ids=[repr(x) for x in testdata])
+def test_add_group(app, Group1):
     pass
     old_groups = app.group.get_group_list()
-    app.group.create(group)
-    assert len(old_groups) +1 == app.group.count()
+    app.group.create(Group1)
+    assert len(old_groups) + 1 == app.group.count()
     new_groups = app.group.get_group_list()
-    old_groups.append(group)
-    #id_or_max was given 2 arguments not 1
+    old_groups.append(Group1)
     assert sorted(old_groups, key = group.id_or_max) == sorted(new_groups, key=group.id_or_max)
 
 
-#def test_empty_group(app):
-#    old_groups = app.group.get_group_list()
-#    Group = group(name="", header="", footer="")
-#    app.group.create(Group)
-#    assert len(old_groups) +1 == len(app.group.count())
-#    new_groups = app.group.get_group_list()
-#    old_groups.append(Group)
-#    assert sorted(old_groups, key = group.id_or_max) == sorted(new_groups, key=group.id_or_max)
+
 

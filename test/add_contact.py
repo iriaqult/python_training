@@ -16,14 +16,14 @@ testdata = [contact(name="", middle_name="", last_name="", email="")]+[
     for i in range(5)
 ]
 
-@pytest.mark.parametrize("contact", testdata, ids=[repr(x) for x in testdata])
-def test_add_contact(app, contact): #тестовый метод прнимающий в качестве пвараметра фикстуру
+@pytest.mark.parametrize("Contact1", testdata, ids=[repr(x) for x in testdata])
+def test_add_contact(app, Contact1): #тестовый метод прнимающий в качестве пвараметра фикстуру
     pass
     old_contacts = app.Contact.get_contact_list()
-    app.Contact.create(contact)
+    app.Contact.create(Contact1)
     assert len(old_contacts) + 1 == app.Contact.count()
     new_contacts = app.Contact.get_contact_list()
-    old_contacts.append(contact)
+    old_contacts.append(Contact1)
     assert sorted(old_contacts, key = contact.id_or_max) == sorted(new_contacts, key = contact.id_or_max)
 
 
