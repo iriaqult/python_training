@@ -9,7 +9,7 @@ def app(request):
     global fixture
     if fixture is None:
         browser = request.config.getoption("--browser")
-        fixture = Application(browser="firefox")
+        fixture = Application(browser= browser)
 
     else:
         if not fixture.is_valid():
