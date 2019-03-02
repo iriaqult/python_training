@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from model.contact import contact
+from model.contact_n import Contact_n
 import pytest
 import random
 import string
@@ -10,9 +10,9 @@ def random_string(prefix, maxlen):
     return prefix + "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
 
 
-testdata = [contact(name="", middle_name="", last_name="", email="")]+[
-    contact(name=random_string("name", 10), middle_name = random_string("middle_name", 20),
-          last_name= random_string("last_name", 10),email=random_string("last_name", 10))
+testdata = [Contact_n(name="", middle_name="", last_name="", email="")] + [
+    Contact_n(name=random_string("name", 10), middle_name = random_string("middle_name", 20),
+              last_name= random_string("last_name", 10), email=random_string("last_name", 10))
     for i in range(5)
 ]
 
@@ -23,7 +23,7 @@ def test_add_contact(app, Contact1): #тестовый метод прнимаю
     assert len(old_contacts) + 1 == app.Contact.count()
     new_contacts = app.Contact.get_contact_list()
     old_contacts.append(Contact1)
-    assert sorted(old_contacts, key = contact.id_or_max) == sorted(new_contacts, key = contact.id_or_max)
+    assert sorted(old_contacts, key = Contact_n.id_or_max) == sorted(new_contacts, key = Contact_n.id_or_max)
 
 
 

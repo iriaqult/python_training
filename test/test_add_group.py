@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from model.group import group
+from model.groupn import Groupn
 import pytest
 import random
 import string
@@ -14,8 +14,8 @@ def random_string(prefix, maxlen):
 #            for footer in ["",random_string("footer", 20)]
 #]
 
-testdata = [group(name="", header="", footer="")]+[
-    group(name=random_string("name", 10), header = random_string("header", 20), footer= random_string("footer", 20))
+testdata = [Groupn(name="", header="", footer="")] + [
+    Groupn(name=random_string("name", 10), header = random_string("header", 20), footer= random_string("footer", 20))
     for i in range(5)
 ]
 
@@ -27,7 +27,7 @@ def test_add_group(app, Group):
     new_groups = app.group.get_group_list()
     old_groups.append(Group)
     x = old_groups
-    assert sorted(old_groups, key = group.id_or_max) == sorted(new_groups, key=group.id_or_max)
+    assert sorted(old_groups, key = Groupn.id_or_max) == sorted(new_groups, key=Groupn.id_or_max)
 
 
 

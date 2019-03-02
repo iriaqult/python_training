@@ -1,4 +1,4 @@
-from model.contact import contact
+from model.contact_n import Contact_n
 import re
 
 class ContactHelper:
@@ -95,8 +95,8 @@ class ContactHelper:
                 lastname = cells[1].text
                 id = element.find_element_by_name("selected[]").get_attribute("value")
                 all_phones = cells[5].text
-                self.contact_cache.append(contact(name=firstname, id=id, last_name=lastname,
-                                                  all_phones_from_homepage=all_phones))
+                self.contact_cache.append(Contact_n(name=firstname, id=id, last_name=lastname,
+                                                    all_phones_from_homepage=all_phones))
         return list(self.contact_cache)
 
 
@@ -125,8 +125,8 @@ class ContactHelper:
         mobilephone = wd.find_element_by_name("mobile").get_attribute("value")
         workphone = wd.find_element_by_name("work").get_attribute("value")
         secondaryphone = wd.find_element_by_name("fax").get_attribute("value")
-        return contact(name=firstname,last_name=lastname,id=id, homephone=homephone,
-                       mobilephone=mobilephone,workphone=workphone, secondaryphone=secondaryphone)
+        return Contact_n(name=firstname, last_name=lastname, id=id, homephone=homephone,
+                         mobilephone=mobilephone, workphone=workphone, secondaryphone=secondaryphone)
 
     def get_contact_from_view_page(self, index):
         wd = self.app.wd
@@ -138,4 +138,4 @@ class ContactHelper:
         #mobilephone = re.search("M: (.*)", text).group(1)
         #workphone = re.search("W: (.*)", text).group(1)
         #secondaryphone = re.search("F: (.*)", text).group(1)
-        return contact(all_phones_from_viewpage=all_phones)
+        return Contact_n(all_phones_from_viewpage=all_phones)

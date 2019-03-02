@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-from model.contact import contact
+from model.contact_n import Contact_n
 from random import randrange
 
 
 def test_del_first_contact(app):
     if app.Contact.count() == 0:
-        app.Contact.create(contact(name = 'test'))
+        app.Contact.create(Contact_n(name ='test'))
     old_contacts = app.Contact.get_contact_list()
     index = randrange(len(old_contacts))
     app.Contact.delete_contact_by_index(index)
