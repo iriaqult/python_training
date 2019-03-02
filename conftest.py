@@ -2,6 +2,7 @@ from fixture.application import Application
 from fixture.session import SessionHelper
 import json
 import os.path
+import pytest
 
 fixture = None
 target = None

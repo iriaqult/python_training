@@ -5,7 +5,7 @@ import random
 import string
 
 def random_string(prefix, maxlen):
-    symbols = string.ascii_letters + string.digits + string.punctuation + " "*10 #из каких символов случайно выбираем, чтобы увеличить частоту пробелов, умножили их количество на 10
+    symbols = string.ascii_letters + string.digits + " "*10 #из каких символов случайно выбираем, чтобы увеличить частоту пробелов, умножили их количество на 10
     return prefix + "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
 
 #testdata = [group(name=name, header=header, footer=footer) #либо None либо случайный , всего 8 комбинаций
@@ -26,6 +26,7 @@ def test_add_group(app, Group):
     assert len(old_groups) + 1 == app.group.count()
     new_groups = app.group.get_group_list()
     old_groups.append(Group)
+    x = old_groups
     assert sorted(old_groups, key = group.id_or_max) == sorted(new_groups, key=group.id_or_max)
 
 
